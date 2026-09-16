@@ -26,7 +26,7 @@ export const events: Event[] = [
     description:
       "Follow along live on Instagram as this week's dog goes from pelted to polished. We'll post the before, the during, and the reveal.",
     image: "/images/events/adoption-day.svg",
-    rsvpUrl: "https://instagram.com/groominggloweupproject",
+    rsvpUrl: "https://www.instagram.com/groomingglowupproject",
     free: true,
   },
   {

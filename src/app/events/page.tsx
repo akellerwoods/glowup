@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { siteConfig } from "@/config/site.config";
 import { events, upcomingEvents } from "@/content/events";
-import { PageHero } from "@/components/layout/PageHero";
+import { PageHead } from "@/components/ui/PageHead";
 import { Container } from "@/components/ui/Container";
-import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { JsonLd } from "@/components/layout/JsonLd";
 import { formatDate } from "@/lib/utils";
-import { CtaBand } from "@/components/sections/home/CtaBand";
 
 export const metadata: Metadata = {
   title: "Events",
@@ -45,7 +42,6 @@ export default function EventsPage() {
     location: e.location.name.startsWith("Online")
       ? { "@type": "VirtualLocation", url: e.rsvpUrl }
       : { "@type": "Place", name: e.location.name, address: e.location.address },
-    image: `${siteConfig.url}${e.image}`,
     description: e.description,
     organizer: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
     offers: {
@@ -61,95 +57,66 @@ export default function EventsPage() {
       {jsonLd.map((d, i) => (
         <JsonLd key={i} data={d} />
       ))}
-      <PageHero
-        eyebrow="Events"
-        title={
-          <>
-            Come see a <span className="text-gold italic">glow-up.</span>
-          </>
-        }
-        description="Grooming days you can follow live, fundraisers with dogs on the patio, and showcases where freshly groomed dogs meet their people."
+      <PageHead
+        label="Events"
+        title="Come see a glow-up."
+        text="Grooming days you can follow live, fundraisers with dogs on the patio, and showcases where freshly groomed dogs meet their people."
       />
-      <section className="bg-black">
-        <Container className="pb-24 sm:pb-32">
-          <RevealGroup as="ul" className="divide-line border-line divide-y border-y">
+      <section className="pb-14 sm:pb-22">
+        <Container>
+          <ul className="hairline-y border-hairline border-y">
             {upcoming.map((e) => (
-              <RevealItem key={e.slug} as="li">
-                <article
-                  id={e.slug}
-                  className="grid scroll-mt-28 gap-8 py-10 lg:grid-cols-12 lg:gap-12"
-                >
-                  <div className="lg:col-span-2">
-                    <p className="font-display text-gold text-6xl tabular-nums">
-                      {new Date(e.date + "T12:00:00").getDate()}
-                    </p>
-                    <p className="mt-1 text-xs tracking-[0.18em] text-white/60 uppercase">
-                      {formatDate(e.date, {
-                        month: "long",
-                        day: undefined,
-                        year: "numeric",
-                      })}
-                    </p>
-                  </div>
-                  <div className="lg:col-span-6">
-                    <h2 className="font-display text-3xl sm:text-4xl">{e.title}</h2>
-                    <p className="mt-3 text-sm text-white/60">
-                      {formatDate(e.date, { weekday: "long" })} · {fmtTime(e.startTime)} –{" "}
-                      {fmtTime(e.endTime)}
-                      <br />
-                      {e.location.name} · {e.location.address}
-                    </p>
-                    <p className="mt-5 max-w-[60ch] text-base leading-relaxed text-white/75">
-                      {e.description}
-                    </p>
-                    <div className="mt-6 flex flex-wrap items-center gap-4">
-                      <Button href={e.rsvpUrl} external>
-                        {e.free ? "RSVP" : "Get tickets"}
-                      </Button>
-                      <span className="text-[0.6875rem] font-semibold tracking-[0.18em] text-white/50 uppercase">
-                        {e.free ? "Free" : "Ticketed"}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="lg:col-span-4">
-                    <div className="bg-surface relative aspect-[3/2] overflow-hidden">
-                      <Image
-                        src={e.image}
-                        alt=""
-                        fill
-                        sizes="(min-width: 1024px) 30vw, 100vw"
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
-                </article>
-              </RevealItem>
+              <li
+                key={e.slug}
+                id={e.slug}
+                className="grid scroll-mt-16 gap-6 py-8 lg:grid-cols-12"
+              >
+                <div className="lg:col-span-2">
+                  <p className="font-display text-gold text-5xl tabular-nums">
+                    {new Date(e.date + "T12:00:00").getDate()}
+                  </p>
+                  <p className="label text-bone/60 mt-2 text-[0.6875rem]">
+                    {formatDate(e.date, {
+                      month: "long",
+                      day: undefined,
+                      year: "numeric",
+                    })}
+                  </p>
+                </div>
+                <div className="lg:col-span-7">
+                  <h2 className="font-display text-2xl sm:text-3xl">{e.title}</h2>
+                  <p className="text-bone/60 mt-2 text-sm">
+                    {formatDate(e.date, { weekday: "long" })} · {fmtTime(e.startTime)} –{" "}
+                    {fmtTime(e.endTime)}
+                    <br />
+                    {e.location.name} · {e.location.address}
+                  </p>
+                  <p className="text-bone/75 mt-4 max-w-[62ch]">{e.description}</p>
+                </div>
+                <div className="flex items-start gap-6 lg:col-span-3 lg:justify-end">
+                  <Button href={e.rsvpUrl} external variant="outline">
+                    {e.free ? "RSVP" : "Get tickets"}
+                  </Button>
+                </div>
+              </li>
             ))}
-          </RevealGroup>
+          </ul>
 
           {past.length ? (
-            <Reveal>
-              <div className="mt-20">
-                <p className="eyebrow">Past events</p>
-                <ul className="divide-line border-line mt-6 divide-y border-y">
-                  {past.map((e) => (
-                    <li
-                      key={e.slug}
-                      className="flex flex-wrap justify-between gap-4 py-4 text-sm text-white/60"
-                    >
-                      <span className="font-display text-lg text-white/80">
-                        {e.title}
-                      </span>
-                      <span>{formatDate(e.date)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
+            <div className="mt-14">
+              <p className="label rule text-gold pt-4">Past events</p>
+              <ul className="hairline-y border-hairline mt-6 border-y">
+                {past.map((e) => (
+                  <li key={e.slug} className="flex flex-wrap justify-between gap-4 py-4">
+                    <span className="font-display text-bone/80 text-lg">{e.title}</span>
+                    <span className="text-bone/60 text-sm">{formatDate(e.date)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ) : null}
         </Container>
       </section>
-      <CtaBand />
     </>
   );
 }

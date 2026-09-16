@@ -11,7 +11,7 @@ export const testimonials: Testimonial[] = [
     quote:
       "You could see the moment the pelt came off. He stood up, shook, and looked at us like he'd just been let out of a cage he'd been carrying on his back.",
     name: "Foster parent",
-    detail: "Butters, Glow-Up #20",
+    detail: "Butters, Week 20 / 52",
     image: "/images/transformations/butters-after.webp",
   },
   {

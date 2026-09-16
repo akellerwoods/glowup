@@ -1,40 +1,19 @@
-import { Hero } from "@/components/sections/home/Hero";
-import { Marquee } from "@/components/ui/Marquee";
-import { ImpactTracker } from "@/components/sections/home/ImpactTracker";
-import { Compassion } from "@/components/sections/home/Compassion";
-import { SecondChance } from "@/components/sections/home/SecondChance";
-import { FeaturedGlowUps } from "@/components/sections/home/FeaturedGlowUps";
-import { HowItWorks } from "@/components/sections/home/HowItWorks";
-import { Partners } from "@/components/sections/home/Partners";
-import { Quote } from "@/components/sections/home/Quote";
-import { DonateSection } from "@/components/sections/home/DonateSection";
-import { UpcomingEvents } from "@/components/sections/home/UpcomingEvents";
-import { CtaBand } from "@/components/sections/home/CtaBand";
+import { Hero } from "@/components/home/Hero";
+import { Brief } from "@/components/home/Brief";
+import { ThisWeek } from "@/components/home/ThisWeek";
+import { TheFiftyTwo } from "@/components/home/TheFiftyTwo";
+import { HowItWorks } from "@/components/home/HowItWorks";
+import { Sponsor } from "@/components/home/Sponsor";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <Marquee
-        items={[
-          "Glow-Ups",
-          "Second Chances",
-          "Dallas Animal Services",
-          "Foster",
-          "Donate",
-          "Adopt",
-        ]}
-      />
-      <ImpactTracker />
-      <Compassion />
-      <SecondChance />
-      <FeaturedGlowUps />
-      <HowItWorks compact />
-      <Partners />
-      <Quote />
-      <DonateSection />
-      <UpcomingEvents />
-      <CtaBand />
+      <Brief />
+      <ThisWeek />
+      <TheFiftyTwo />
+      <HowItWorks />
+      <Sponsor />
     </>
   );
 }

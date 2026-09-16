@@ -17,8 +17,8 @@ export default async function Image() {
         height: "100%",
         display: "flex",
         alignItems: "center",
-        background: "#0a0a0a",
-        color: "#ffffff",
+        background: "#0b0b0c",
+        color: "#ede8de",
         padding: "72px",
         fontFamily: "Georgia, serif",
       }}
@@ -29,50 +29,46 @@ export default async function Image() {
         <div
           style={{
             display: "flex",
-            alignItems: "center",
-            gap: 16,
-            color: "#c9a227",
-            fontSize: 22,
+            color: "#d4a537",
+            fontSize: 20,
             letterSpacing: 6,
             fontFamily: "Helvetica, Arial, sans-serif",
+            borderTop: "1px solid rgba(212,165,55,0.35)",
+            paddingTop: 16,
           }}
         >
-          <div style={{ width: 40, height: 2, background: "#c9a227" }} />
           DALLAS, TEXAS
         </div>
         <div
           style={{
             display: "flex",
-            flexWrap: "wrap",
-            fontSize: 88,
-            lineHeight: 0.95,
-            marginTop: 28,
-            letterSpacing: -3,
+            fontSize: 76,
+            lineHeight: 1.1,
+            marginTop: 32,
+            maxWidth: 660,
           }}
         >
-          <span>Every dog deserves a&nbsp;</span>
-          <span style={{ color: "#c9a227", fontStyle: "italic" }}>glow-up.</span>
+          {siteConfig.tagline}
         </div>
         <div
           style={{
-            marginTop: 36,
-            fontSize: 24,
-            color: "rgba(255,255,255,0.72)",
+            marginTop: 32,
+            fontSize: 22,
+            color: "rgba(237,232,222,0.7)",
             fontFamily: "Helvetica, Arial, sans-serif",
-            lineHeight: 1.4,
-            maxWidth: 640,
+            lineHeight: 1.5,
+            maxWidth: 620,
           }}
         >
-          Professional grooming for dogs entering Dallas Animal Services in urgent need of
-          care.
+          {siteConfig.oneLine}
         </div>
       </div>
       <img
         src={logoSrc}
         alt=""
-        width={360}
-        height={360}
-        style={{ width: 360, height: 360 }}
+        width={340}
+        height={340}
+        style={{ width: 340, height: 340 }}
       />
     </div>,
     { ...size },

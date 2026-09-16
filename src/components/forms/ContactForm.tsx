@@ -9,9 +9,9 @@ export function ContactForm() {
   const [state, action, pending] = useActionState<FormState, FormData>(submitContact, {});
   if (state.status === "success") {
     return (
-      <div className="border-gold/40 border p-8">
+      <div className="rule pt-6">
         <p className="font-display text-2xl">Message sent.</p>
-        <p className="mt-2 text-white/75">{state.message}</p>
+        <p className="text-bone/75 mt-2">{state.message}</p>
       </div>
     );
   }
@@ -61,7 +61,7 @@ export function ContactForm() {
       <div className="flex flex-col gap-4 sm:col-span-2">
         <FormMessage status={state.status} message={state.message} />
         <div>
-          <Button type="submit" size="lg" disabled={pending}>
+          <Button type="submit" disabled={pending}>
             {pending ? "Sending…" : "Send message"}
           </Button>
         </div>

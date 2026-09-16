@@ -3,8 +3,13 @@
 Marketing site for the Grooming Glow-Up Project, a Dallas nonprofit that provides professional
 grooming for dogs entering Dallas Animal Services in urgent need of care.
 
-Built with Next.js (App Router, TypeScript), Tailwind CSS v4, Framer Motion, and Lenis.
-No CMS, no database: all content lives in typed files under `src/content`.
+Built with Next.js (App Router, TypeScript) and Tailwind CSS v4. No animation libraries, no CMS,
+no database: all content lives in typed files under `src/content`.
+
+The look follows **Grooming Glow-Up Brand Standards v1.0**: Obsidian ground, Bone body text,
+Signature Gold as an accent (never a field), Playfair Display + Jost, hairlines instead of boxes,
+square corners, 8-pt spacing. Tokens are in `src/app/globals.css`; approved copy is in
+`src/config/site.config.ts` and must be used verbatim.
 
 ## Run it
 
@@ -32,8 +37,8 @@ export const impact = {
 };
 ```
 
-Change the numbers, save, deploy. The rings, the count-up, the "Week N" label, and the
-placed/foster bar all recalculate.
+Change the numbers, save, deploy. The hero counter, the 52-grid, and the figures on /the-52
+all recalculate.
 
 ## Organization details
 
@@ -61,7 +66,7 @@ widget then renders inline on the home page and `/donate`. Until both are set, t
    slug, name, week number, groom date, breed, age, status (`available`, `in-foster`,
    `adopted`, `rescued`), hours, whether sedation was used, a one-line summary, the story,
    and the two image paths.
-3. Set `featured: true` on the dog you want in the home-page before/after slider (only one).
+3. Set `featured: true` on the dog you want in the home-page "This week" section (only one).
 
 The entries marked `sample: true` are layout samples with placeholder art. Delete them once
 you have real dogs.
@@ -70,7 +75,8 @@ you have real dogs.
 
 | File                          | What it holds                                                          |
 | ----------------------------- | ---------------------------------------------------------------------- |
-| `src/content/events.ts`       | Events list. Upcoming ones show on the home page and `/events`.        |
+| `src/content/events.ts`       | Events list, shown on `/events`.                                       |
+| `src/content/sponsorship.ts`  | Gift tiers shown on the home page and `/donate`.                       |
 | `src/content/team.ts`         | The three partners (names, roles, bios), partner organizations, board. |
 | `src/content/faqs.ts`         | FAQ accordion on `/how-it-works`.                                      |
 | `src/content/testimonials.ts` | Quotes on `/about`.                                                    |

@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 
+/** Margins are generous: 24 px on a phone, more as the viewport grows. */
 export function Container({
   className,
   children,
@@ -10,7 +11,9 @@ export function Container({
   as?: "div" | "section" | "header" | "footer" | "nav" | "article";
 }) {
   return (
-    <Tag className={cn("mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12", className)}>
+    <Tag
+      className={cn("mx-auto w-full max-w-[1200px] px-6 sm:px-10 lg:px-14", className)}
+    >
       {children}
     </Tag>
   );

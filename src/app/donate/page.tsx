@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site.config";
-import { PageHero } from "@/components/layout/PageHero";
-import { DonateSection } from "@/components/sections/home/DonateSection";
+import { PageHead } from "@/components/ui/PageHead";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { SectionHead } from "@/components/ui/SectionHead";
 import { Button } from "@/components/ui/Button";
-import { ImpactTracker } from "@/components/sections/home/ImpactTracker";
+import { TierTable } from "@/components/home/Sponsor";
+import { GivebutterWidget } from "@/components/GivebutterWidget";
 
 export const metadata: Metadata = {
-  title: "Donate",
+  title: "Sponsor a Week",
   description:
-    "Fund professional grooming, tools, and veterinary sedation for Dallas Animal Services dogs in urgent need. Give once or monthly through Givebutter.",
+    "Sponsor one week of professional grooming, tools, and veterinary sedation for a Dallas Animal Services dog in urgent need. Give once or monthly through Givebutter.",
 };
 
 const other = [
@@ -32,7 +31,7 @@ const other = [
     title: "Employer matching",
     body: "Many employers double gifts to 501(c)(3) organizations. Search your company on Givebutter's matching tool at checkout.",
     cta: "Give now",
-    href: "#donate",
+    href: "#give",
   },
   {
     title: "Host a fundraiser",
@@ -45,58 +44,50 @@ const other = [
 export default function DonatePage() {
   return (
     <>
-      <PageHero
-        eyebrow="Donate"
-        image="/images/donate.jpg"
-        title={
-          <>
-            Fund the next <span className="text-gold italic">glow-up.</span>
-          </>
-        }
-        description="A single transformation costs between $150 and $300. Every dollar goes to groomer time, tools, medicated care, and veterinary sedation when a dog is in pain."
+      <PageHead
+        label="Sponsor a Week"
+        title="One week. One dog. Your name on the transformation."
+        text="A single glow-up runs $150 to $300 in groomer time, tools, medicated care, and veterinary sedation when a dog is in pain. Every dollar goes to the dog."
       >
-        <div className="mt-10">
-          <Button href="#donate" size="lg">
-            Give now
-          </Button>
-        </div>
-      </PageHero>
-      <DonateSection headingLevel="h2" />
-      <ImpactTracker />
-      <section className="grain bg-black" aria-labelledby="other-heading">
-        <Container className="py-20 sm:py-28 lg:py-36">
-          <SectionHeading
-            eyebrow="Other ways to give"
-            title={<span id="other-heading">Not every gift is a dollar.</span>}
-          />
-          <RevealGroup
-            as="ul"
-            className="border-line bg-line mt-12 grid gap-px border sm:grid-cols-2"
-          >
+        <Button href="#give">Give now</Button>
+      </PageHead>
+
+      <section id="give" className="scroll-mt-16 pb-14 sm:pb-22">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-6">
+              <p className="label rule text-gold pt-4">What a gift covers</p>
+              <div className="mt-8">
+                <TierTable />
+              </div>
+            </div>
+            <div className="lg:col-span-5 lg:col-start-8">
+              <GivebutterWidget />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="pb-14 sm:pb-22">
+        <Container>
+          <SectionHead label="Other ways to give" title="Not every gift is a dollar." />
+          <ul className="hairline-y border-hairline mt-10 border-y">
             {other.map((o) => (
-              <RevealItem key={o.title} as="li" className="bg-black">
-                <div className="flex h-full flex-col justify-between gap-8 p-8 sm:p-10">
-                  <div>
-                    <h3 className="font-display text-3xl">{o.title}</h3>
-                    <p className="mt-4 max-w-[40ch] text-sm leading-relaxed text-white/70 sm:text-base">
-                      {o.body}
-                    </p>
-                  </div>
-                  <div>
-                    <Button href={o.href} external={o.external} variant="secondary">
-                      {o.cta}
-                    </Button>
-                  </div>
+              <li key={o.title} className="grid gap-3 py-6 sm:grid-cols-12 sm:gap-6">
+                <h3 className="font-display text-2xl sm:col-span-4">{o.title}</h3>
+                <p className="text-bone/75 max-w-[52ch] sm:col-span-6">{o.body}</p>
+                <div className="sm:col-span-2 sm:text-right">
+                  <Button href={o.href} external={o.external} variant="text">
+                    {o.cta}
+                  </Button>
                 </div>
-              </RevealItem>
+              </li>
             ))}
-          </RevealGroup>
-          <Reveal delay={0.2}>
-            <p className="mt-10 text-xs text-white/50">
-              {siteConfig.name} is a registered 501(c)(3) nonprofit, EIN {siteConfig.ein}.
-              Donations are tax-deductible to the extent allowed by law.
-            </p>
-          </Reveal>
+          </ul>
+          <p className="text-bone/50 mt-8 text-xs">
+            {siteConfig.name} is a registered 501(c)(3) nonprofit, EIN {siteConfig.ein}.
+            Donations are tax-deductible to the extent allowed by law.
+          </p>
         </Container>
       </section>
     </>

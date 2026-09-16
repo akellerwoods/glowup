@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { siteConfig } from "@/config/site.config";
-import { PageHero } from "@/components/layout/PageHero";
-import { SecondChance } from "@/components/sections/home/SecondChance";
+import { PageHead } from "@/components/ui/PageHead";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { SectionHead } from "@/components/ui/SectionHead";
 import { Button } from "@/components/ui/Button";
 import { FosterForm } from "@/components/forms/FosterForm";
 import { VolunteerForm } from "@/components/forms/VolunteerForm";
@@ -15,6 +12,31 @@ export const metadata: Metadata = {
   description:
     "Adopt through Dallas Animal Services, foster a recovering glow-up dog, volunteer as a groomer, or fill our supply wishlist.",
 };
+
+const ways = [
+  {
+    n: "01",
+    title: "Adopt",
+    body: `Every glow-up dog stays in the care of ${siteConfig.partnerShelter.name}. Meet them freshly groomed, then adopt through the shelter.`,
+    cta: "Adopt through DAS",
+    href: siteConfig.partnerShelter.adoptUrl,
+    external: true,
+  },
+  {
+    n: "02",
+    title: "Foster",
+    body: "Some dogs heal better in a living room than a kennel. Open your home for a few weeks while the coat and skin recover.",
+    cta: "Become a foster",
+    href: "#foster",
+  },
+  {
+    n: "03",
+    title: "Sponsor",
+    body: "A single glow-up costs $150 to $300 in groomer time, tools, medicated shampoo, and sedation. Fund the next one.",
+    cta: "Sponsor a week",
+    href: "/donate",
+  },
+];
 
 const fosterProvides = [
   "Food, crate, bedding, and any medicated shampoo or ointment the dog needs",
@@ -49,122 +71,101 @@ const roles = [
 export default function GetInvolvedPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Get involved"
-        title={
-          <>
-            Be part of the <span className="text-gold italic">next</span> glow-up.
-          </>
-        }
-        description="A groom takes one afternoon. A second chance takes a community. Here's where you fit."
+      <PageHead
+        label="Get involved"
+        title="Give a dog a second chance."
+        text="A groom takes one afternoon. A second chance takes a community. Here's where you fit."
       />
-      <SecondChance />
 
-      <section
-        id="foster"
-        className="grain scroll-mt-24 bg-black"
-        aria-labelledby="foster-heading"
-      >
-        <Container className="py-20 sm:py-28 lg:py-36">
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-5">
-              <SectionHeading
-                eyebrow="Foster"
-                title={
-                  <span id="foster-heading">
-                    A living room heals faster than a kennel.
+      <section className="pb-14 sm:pb-22">
+        <Container>
+          <ol className="divide-hairline border-hairline grid divide-y border-y md:grid-cols-3 md:divide-x md:divide-y-0">
+            {ways.map((w) => (
+              <li
+                key={w.n}
+                className="flex flex-col justify-between gap-8 py-8 md:px-8 md:first:pl-0 md:last:pr-0"
+              >
+                <div>
+                  <span className="font-display text-gold text-4xl tabular-nums">
+                    {w.n}
                   </span>
-                }
-                description="Some dogs come off the table with raw skin, sores, or a fear of hands. A few weeks in a quiet home changes everything."
-              />
-              <Reveal delay={0.15}>
-                <ul className="divide-line border-line mt-10 divide-y border-y">
-                  {fosterProvides.map((f) => (
-                    <li key={f} className="flex gap-4 py-4 text-sm text-white/75">
-                      <span aria-hidden className="bg-gold mt-2 h-px w-6 shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-              <Reveal delay={0.2}>
-                <div className="bg-surface relative mt-10 aspect-[4/5] max-w-sm overflow-hidden">
-                  <Image
-                    src="/images/foster.jpg"
-                    alt=""
-                    fill
-                    sizes="(min-width: 1024px) 30vw, 100vw"
-                    className="object-cover"
-                  />
+                  <h2 className="font-display mt-6 text-2xl">{w.title}</h2>
+                  <p className="text-bone/70 mt-3 max-w-[38ch]">{w.body}</p>
                 </div>
-              </Reveal>
+                <div>
+                  <Button href={w.href} external={w.external} variant="text">
+                    {w.cta}
+                  </Button>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </section>
+
+      <section id="foster" className="scroll-mt-16 pb-14 sm:pb-22">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <SectionHead
+                label="Foster"
+                title="A living room heals faster than a kennel."
+                text="Some dogs come off the table with raw skin, sores, or a fear of hands. A few weeks in a quiet home changes everything."
+              />
+              <ul className="hairline-y border-hairline mt-8 border-y">
+                {fosterProvides.map((f) => (
+                  <li key={f} className="text-bone/75 py-3">
+                    {f}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="lg:col-span-7">
-              <Reveal delay={0.1}>
-                <h3 className="font-display mb-8 text-2xl">Foster interest form</h3>
+            <div className="lg:col-span-6 lg:col-start-7">
+              <p className="label rule text-gold pt-4">Foster interest form</p>
+              <div className="mt-8">
                 <FosterForm />
-              </Reveal>
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
-      <section
-        id="volunteer"
-        className="on-light bg-cream scroll-mt-24 text-black"
-        aria-labelledby="volunteer-heading"
-      >
-        <Container className="py-20 sm:py-28 lg:py-36">
-          <SectionHeading
-            eyebrow="Volunteer"
-            title={<span id="volunteer-heading">Give your hands.</span>}
-            description="Most of what we do happens on a grooming table on a Saturday. Here's who we need there."
+      <section id="volunteer" className="scroll-mt-16 pb-14 sm:pb-22">
+        <Container>
+          <SectionHead
+            label="Volunteer"
+            title="Give your hands."
+            text="Most of what we do happens on a grooming table on a Saturday. Here's who we need there."
           />
-          <RevealGroup
-            as="ul"
-            className="border-line-light bg-line-light mt-12 grid gap-px border sm:grid-cols-2 lg:grid-cols-5"
-          >
+          <ul className="hairline-y border-hairline mt-10 border-y">
             {roles.map((r) => (
-              <RevealItem key={r.title} as="li" className="bg-cream">
-                <div className="flex h-full flex-col gap-4 p-6">
-                  <h3 className="font-display text-2xl">{r.title}</h3>
-                  <p className="text-muted-light text-sm leading-relaxed">{r.body}</p>
-                </div>
-              </RevealItem>
+              <li key={r.title} className="grid gap-2 py-5 sm:grid-cols-12 sm:gap-6">
+                <h3 className="font-display text-xl sm:col-span-4">{r.title}</h3>
+                <p className="text-bone/75 max-w-[62ch] sm:col-span-8">{r.body}</p>
+              </li>
             ))}
-          </RevealGroup>
-        </Container>
-      </section>
+          </ul>
 
-      <section className="grain bg-black" aria-labelledby="volunteer-form-heading">
-        <Container className="py-20 sm:py-28">
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="mt-14 grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <SectionHeading
-                eyebrow="Sign up"
-                size="md"
-                title={<span id="volunteer-form-heading">Volunteer form</span>}
-                description="Tell us what you're good at. We'll reach out before the next glow-up day."
-              />
-              <Reveal delay={0.15}>
-                <div className="border-line mt-10 border p-6">
-                  <p className="eyebrow">Supply wishlist</p>
-                  <p className="mt-3 text-sm text-white/70">
-                    Blades, medicated shampoo, towels, dryers. Every item ships straight
-                    to the table.
-                  </p>
-                  <div className="mt-5">
-                    <Button href={siteConfig.wishlistUrl} external variant="secondary">
-                      View the wishlist
-                    </Button>
-                  </div>
-                </div>
-              </Reveal>
+              <p className="label rule text-gold pt-4">Volunteer form</p>
+              <p className="text-bone/70 mt-6">
+                Tell us what you&apos;re good at. We&apos;ll reach out before the next
+                glow-up day.
+              </p>
+              <p className="label rule text-gold mt-10 pt-4">Supply wishlist</p>
+              <p className="text-bone/70 mt-4">
+                Blades, medicated shampoo, towels, dryers. Every item ships straight to
+                the table.
+              </p>
+              <div className="mt-6">
+                <Button href={siteConfig.wishlistUrl} external variant="outline">
+                  View the wishlist
+                </Button>
+              </div>
             </div>
             <div className="lg:col-span-8">
-              <Reveal delay={0.1}>
-                <VolunteerForm />
-              </Reveal>
+              <VolunteerForm />
             </div>
           </div>
         </Container>

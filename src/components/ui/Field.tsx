@@ -9,6 +9,8 @@ type Common = {
   hint?: string;
 };
 
+const labelCls = "label text-[0.6875rem] text-bone/60";
+
 export function Field({
   label,
   name,
@@ -28,10 +30,7 @@ export function Field({
 }) {
   return (
     <div className={cn("flex flex-col gap-2", className)}>
-      <label
-        htmlFor={name}
-        className="text-xs font-semibold tracking-[0.16em] uppercase opacity-70"
-      >
+      <label htmlFor={name} className={labelCls}>
         {label}
         {required ? <span className="text-gold"> *</span> : null}
       </label>
@@ -48,7 +47,7 @@ export function Field({
         className="field"
       />
       {hint && !error ? (
-        <p id={`${name}-hint`} className="text-xs opacity-60">
+        <p id={`${name}-hint`} className="text-bone/50 text-xs">
           {hint}
         </p>
       ) : null}
@@ -73,10 +72,7 @@ export function TextArea({
 }: Common & { placeholder?: string; rows?: number }) {
   return (
     <div className={cn("flex flex-col gap-2", className)}>
-      <label
-        htmlFor={name}
-        className="text-xs font-semibold tracking-[0.16em] uppercase opacity-70"
-      >
+      <label htmlFor={name} className={labelCls}>
         {label}
         {required ? <span className="text-gold"> *</span> : null}
       </label>
@@ -91,7 +87,7 @@ export function TextArea({
         className="field resize-y"
       />
       {hint && !error ? (
-        <p id={`${name}-hint`} className="text-xs opacity-60">
+        <p id={`${name}-hint`} className="text-bone/50 text-xs">
           {hint}
         </p>
       ) : null}
@@ -115,10 +111,7 @@ export function Select({
 }: Common & { options: { value: string; label: string }[]; defaultValue?: string }) {
   return (
     <div className={cn("flex flex-col gap-2", className)}>
-      <label
-        htmlFor={name}
-        className="text-xs font-semibold tracking-[0.16em] uppercase opacity-70"
-      >
+      <label htmlFor={name} className={labelCls}>
         {label}
         {required ? <span className="text-gold"> *</span> : null}
       </label>
@@ -144,31 +137,6 @@ export function Select({
   );
 }
 
-export function Checkbox({
-  label,
-  name,
-  defaultChecked,
-  value = "yes",
-}: {
-  label: React.ReactNode;
-  name: string;
-  defaultChecked?: boolean;
-  value?: string;
-}) {
-  return (
-    <label className="flex cursor-pointer items-start gap-3 text-sm">
-      <input
-        type="checkbox"
-        name={name}
-        value={value}
-        defaultChecked={defaultChecked}
-        className="checked:bg-gold checked:border-gold mt-0.5 h-4 w-4 shrink-0 cursor-pointer appearance-none border border-current"
-      />
-      <span className="opacity-80">{label}</span>
-    </label>
-  );
-}
-
 export function FormMessage({
   status,
   message,
@@ -182,8 +150,8 @@ export function FormMessage({
       role="status"
       aria-live="polite"
       className={cn(
-        "border-l-2 py-2 pl-4 text-sm",
-        status === "success" ? "border-gold" : "border-white/40",
+        "border-l py-1 pl-4 text-sm",
+        status === "success" ? "border-gold text-bone" : "border-bone/40 text-bone/80",
       )}
     >
       {message}

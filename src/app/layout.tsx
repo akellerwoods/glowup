@@ -1,26 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Jost, Playfair_Display } from "next/font/google";
 import { siteConfig } from "@/config/site.config";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { Preloader } from "@/components/layout/Preloader";
-import { SmoothScroll } from "@/components/layout/SmoothScroll";
-import { Cursor } from "@/components/layout/Cursor";
 import { OrganizationJsonLd } from "@/components/layout/JsonLd";
 import "./globals.css";
 
-// Static 400 regular + italic keeps the display font small (the variable file is ~120 KB).
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+// Brand typography: Playfair Display 500/600 (display, italic for pull quotes), Jost 300/400/500.
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["500", "600"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
-const manrope = Manrope({
-  variable: "--font-manrope",
+const jost = Jost({
+  variable: "--font-jost",
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
   display: "swap",
 });
 
@@ -36,9 +34,9 @@ export const metadata: Metadata = {
     "dog grooming nonprofit",
     "Dallas Animal Services",
     "shelter dog grooming",
-    "matted dog rescue",
+    "matted dog grooming",
     "Dallas dog nonprofit",
-    "donate dog grooming",
+    "sponsor dog grooming",
   ],
   openGraph: {
     type: "website",
@@ -56,7 +54,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: "#0b0b0c",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -64,23 +62,19 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${manrope.variable} h-full`}>
+    <html lang="en" className={`${playfair.variable} ${jost.variable} h-full`}>
       <body className="flex min-h-full flex-col">
         <a
           href="#main"
-          className="focus:bg-gold sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[300] focus:px-4 focus:py-2 focus:text-black"
+          className="focus:bg-gold focus:text-ink sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[300] focus:px-4 focus:py-2"
         >
           Skip to content
         </a>
-        <Preloader />
-        <Cursor />
-        <SmoothScroll>
-          <Header />
-          <main id="main" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </SmoothScroll>
+        <Header />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <Footer />
         <OrganizationJsonLd />
       </body>
     </html>

@@ -28,7 +28,7 @@ export const statusLabel: Record<Status, string> = {
   adopted: "Adopted",
   "in-foster": "In foster",
   available: "Available at DAS",
-  rescued: "Rescued out",
+  rescued: "Rescue transfer",
 };
 
 export const transformations: Transformation[] = [

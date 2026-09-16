@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 
 /**
  * Givebutter embed. Configure `siteConfig.givebutter` (scriptSrc + widgetId).
- * Until both are set, a plain donate button pointing at the campaign URL is shown.
+ * Until both are set, a plain button pointing at the campaign URL is shown.
  */
 export function GivebutterWidget({ className }: { className?: string }) {
   const { scriptSrc, widgetId, campaignUrl } = siteConfig.givebutter;
@@ -13,21 +13,21 @@ export function GivebutterWidget({ className }: { className?: string }) {
   if (!configured) {
     return (
       <div className={className}>
-        <div className="border-gold/40 bg-surface flex flex-col items-start gap-5 border p-8 sm:p-10">
-          <p className="eyebrow">Givebutter</p>
-          <p className="font-display text-2xl text-balance sm:text-3xl">
-            Give securely through Givebutter.
-          </p>
-          <p className="max-w-md text-sm text-white/70">
+        <div className="rule pt-4">
+          <p className="label text-gold">Give</p>
+          <p className="font-display mt-6 text-2xl">Give securely through Givebutter.</p>
+          <p className="text-bone/70 mt-4 max-w-md">
             One-time or monthly. Tax-deductible. Every dollar goes toward the next
             glow-up.
           </p>
-          <Button href={campaignUrl} external size="lg">
-            Donate on Givebutter
-          </Button>
-          <p className="text-xs text-white/40">
+          <div className="mt-8">
+            <Button href={campaignUrl} external>
+              Sponsor on Givebutter
+            </Button>
+          </div>
+          <p className="text-bone/40 mt-6 text-xs">
             Site admin: paste your Givebutter embed details into{" "}
-            <code className="text-white/60">site.config.ts</code> to show the widget
+            <code className="text-bone/60">site.config.ts</code> to show the widget
             inline.
           </p>
         </div>
@@ -41,13 +41,13 @@ export function GivebutterWidget({ className }: { className?: string }) {
       <div className="bg-white p-2 text-black">
         <givebutter-widget id={widgetId} />
       </div>
-      <p className="mt-4 text-xs text-white/50">
+      <p className="text-bone/50 mt-4 text-xs">
         Widget not loading?{" "}
         <a
           href={campaignUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="link-underline text-white/80"
+          className="text-bone/80 hover:text-gold"
         >
           Give on Givebutter
         </a>
